@@ -1,0 +1,28 @@
+<div class="step3_description">
+The default disks for the template you have selected are listed below.
+You can add, modify or delete virtual disks interfaces.
+When you have finished, click "Next Step" to continue.
+</div>
+
+<div style="float:left;clear:none;width:100%;">
+	<div class="step2_vm_label">Virtual disks installed on the new machine:</div>
+</div>
+
+<div class="disks_settings">
+	<table style="width:100%;border-collapse:collapse;clear:both;" id="disks_settings_table">
+		<tr>
+			<th style="border-right: 1px solid #717171;">Size (MB)</th>
+			<th style="border-right: 1px solid #717171;">Location</th>
+			<th>Shared</th>
+		</tr>
+	</table>
+</div>
+
+<div class="buttons">
+		<button onclick="install_vm.step_3_new_disk_window(0);">Add...</button>
+		<button onclick="install_vm.step_3_new_disk_window(1);">Edit...</button>
+		<button onclick="install_vm.step_3_delete_disk();">Delete</button>
+</div>
+
+
+<div class="next_step_button" onclick="install_vm.step_4();"></div>

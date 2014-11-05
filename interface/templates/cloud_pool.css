@@ -1,0 +1,160 @@
+.vm_list_box
+{
+margin-left: 30px;
+clear:both;
+width: 940px;
+background-color:#eef6f7;
+border: 1px solid #89b1c1;
+padding: 5px;
+behavior: url("/interface/border-radius.htc");
+-moz-border-radius: 4px;
+-webkit-border-radius: 4px;
+border-radius: 4px;
+}
+
+.vm_list_box  .label
+{
+font-family: Arial,Helvetica,sans-serif;
+font-weight: bold;
+font-size: 1.5em;
+text-align: left;
+color: #444444;
+
+}
+
+.vm_list_box .line
+{
+border-top: 1px solid #89b1c1;
+margin-top: 3px;
+margin-bottom: 3px;
+width: 100%;
+}
+
+.vm_list_box .pool_server
+{
+margin-top: 4px;
+width:100%;
+border-collapse: collapse;
+}
+
+/* params for each host */
+
+.vm_list_box .pool_server .pool_server_tr
+{
+height: 24px;
+}
+
+.vm_list_box .pool_server .pool_server_tr:hover
+{
+background-color: #e9fcfe;
+cursor: pointer;
+}
+
+.vm_list_box .pool_server .img
+{
+width:24px;
+padding-left:4px;
+}
+
+.vm_list_box .pool_server .server_name
+{
+font-family: Arial,Helvetica,sans-serif;
+font-weight: bold;
+font-size: 1.2em;
+text-align: left;
+width: 140px;
+color: #444444;
+}
+
+.vm_list_box .pool_server .server_description
+{
+font-size: 8pt;
+width: 232px;
+}
+
+.vm_list_box .pool_server .memory_usage_text
+{
+font-family: Arial,Helvetica,sans-serif;
+font-weight: bold;
+font-size: 0.8em;
+text-align: left;
+padding-right: 4px;
+padding-left: 4px;
+color: #444444;
+float:left;
+clear:none;
+}
+
+.vm_list_box .pool_server .memory_usage
+{
+width:320px;
+}
+
+.vm_list_box .pool_server .cpu_usage
+{
+width:220px;
+}
+
+/* params for each VM */
+
+.vm_list_box .pool_server .vm_row
+{
+height: 20px;
+}
+
+.vm_list_box .pool_server .vm_row:hover
+{
+background-color: #e9fcfe;
+cursor: pointer;
+}
+
+.vm_list_box .pool_server .vm_row_status
+{
+width: 28px;
+}
+
+.vm_list_box .pool_server .vm_row_name
+{
+font-family: Arial,Helvetica,sans-serif;
+font-weight: bold;
+font-size: 1em;
+text-align: left;
+width: 137px;
+}
+
+.vm_list_box .pool_server .vm_row_description
+{
+font-size: 8pt;
+width: 234px;
+}
+
+.vm_list_box .pool_server .vm_row_memory
+{
+width:320px;
+}
+
+.vm_list_box .pool_server .vm_row_cpus
+{
+font-family: Arial,Helvetica,sans-serif;
+font-weight: bold;
+font-size: 0.8em;
+text-align: left;
+color: #444444;
+}
+
+.vm_list_box .pool_server .cpus_count
+{
+width: 84px;
+}
+
+.vm_list_box .pool_server .cpus_weight
+{
+width: 76px;
+}
+
+.vm_list_box .pool_server .cpus_cap
+{
+width: 60px;
+}
+
+

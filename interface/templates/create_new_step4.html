@@ -1,0 +1,26 @@
+<div class="step3_description">
+The default network interfaces for the template you have selected are listed below.
+You can add or delete virtual interfaces interfaces.
+When you have finished, click "Next Step" to continue.
+</div>
+
+<div style="float:left;clear:none;width:100%;">
+	<div class="step2_vm_label">Virtual network interfaces installed on the new machine:</div>
+</div>
+
+<div class="network_settings" >
+	<table style="width:100%;border-collapse:collapse;clear:both;" id="network_settings_table">
+		<tr>
+			<th style="border-right: 1px solid #717171;">Interface name</th>
+			<th>MAC Address</th>
+			<th>Network</th>
+		</tr>
+	</table>
+</div>
+
+<div class="buttons">
+		<button onclick="install_vm.step_4_new_vif_window();">Add...</button>
+		<button onclick="install_vm.step_4_delete_vif();">Delete</button>
+</div>
+
+<div class="next_step_button" onclick="install_vm.step_5();"></div>

@@ -1,0 +1,101 @@
+.header_menu 
+{
+padding-left: 30px;
+text-align: left;
+clear:both;
+height: 66px;
+}
+
+.header_menu .cloud_pool_button
+{
+width: 210px;
+height: 50px;
+background-image: url(/interface/img/cloud_pool_button.png);
+display: block;
+cursor: pointer;
+margin-right: 30px;
+float: left;
+clear: none;
+}
+
+.header_menu .cloud_pool_button:hover
+{
+background-image: url(/interface/img/cloud_pool_button_active.png) !important;
+}
+
+.header_menu .create_new_button
+{
+width: 210px;
+height: 50px;
+background-image: url(/interface/img/create_new_button.png);
+display: block;
+cursor: pointer;
+margin-right: 30px;
+float: left;
+clear: none;
+}
+
+.header_menu .create_new_button:hover
+{
+background-image: url(/interface/img/create_new_button_active.png) !important;
+}
+
+.header_menu .settings_button
+{
+width: 210px;
+height: 50px;
+background-image: url(/interface/img/settings_button.png);
+display: block;
+cursor: pointer;
+margin-right: 30px;
+float: left;
+clear: none;
+}
+
+.header_menu .settings_button:hover
+{
+background-image: url(/interface/img/settings_button_active.png) !important;
+}
+
+.main_content
+{
+float:left;
+clear:both;
+}
+
+/*tasks*/
+.task_box
+{
+margin: 0 auto;
+clear:none;
+float:right;
+min-width: 150px;
+min-height: 24px;
+background-color:#fff8d6;
+border: 1px solid #fbc27f;
+-moz-border-radius: 4px;
+-webkit-border-radius: 4px;
+border-radius: 4px;
+font-family: Arial;
+font-size: 13px;
+font-weight: bold;
+text-align: center;
+padding-top: 4px;
+}
+
+.task_box .cell_padding
+{
+padding-left: 4px;
+padding-right: 4px;
+}
+
+#Bar
+{
+	width: 101px; height: 10px;
+	text-align: center;
+	background: url(/interface/img/meter.gif) repeat-x bottom left;
+	margin-left: 3px;
+	margin-right: 3px;
+	margin-top: 3px;
+	float: left;
+}

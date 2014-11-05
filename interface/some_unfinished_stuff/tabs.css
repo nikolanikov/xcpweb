@@ -1,0 +1,105 @@
+table.tabs {
+	height:24px;
+	padding:0;
+	border:0;
+}
+table.tabs td {
+	min-width:30px;
+	border:0;
+	padding:0;
+	padding-top:0px;
+	width:auto;
+}
+table.tabs td .tabBg {
+	float:left;
+	margin-top:5px;
+	border:1px solid #867878;
+ 	min-width:30px;
+	font-size:12px;
+	border-right:0;
+	height:15px;
+	padding:0;
+	padding-top:3px;
+	padding-left:5px;
+	padding-right:5px;
+	background-color:#EEEAEB;
+	background-image:url('img/tabs/unactive-gradient.jpg');
+	background-repeat:repeat-x;
+	background-position:left top;
+	color:#8B7F7F;
+	border-left:1px solid #000000;
+	overflow:hidden;
+	position:relative;
+}
+table.tabs td .tabBg span.tabClose {
+	position:absolute;
+	top:0px;
+	right:0px;
+	display:none;
+}
+table.tabs td .tabBg:hover  span.tabClose {
+	display:block;
+	position:absolute;
+	top:0px;
+	right:0px;
+}
+table.tabs td .tabBg a {
+	height:100%;
+	text-decoration:none;
+	cursor:pointer;
+}
+table.tabs td.activeTab {
+	background-image:url('img/tabs/border.png');
+	background-repeat:no-repeat;
+	background-position:bottom right;
+	padding-right:4px;
+}
+table.tabs td.activeTab .tabBg {
+	border:1px solid #867878;
+ 	min-width:30px;
+	font-size:12px;
+	height:16px;
+	padding:0;
+	padding-top:7px;
+	padding-left:12px;
+	padding-right:12px;
+	font-weight:bold;
+	background-color:#f3f3f3;
+	background-image:url('img/tabs/active-gradient.jpg');
+	background-repeat:repeat-x;
+	background-position:left top;
+	border-bottom:1px solid #f3f3f3;
+	margin-top:0px;
+	text-align:center;
+	color:#4E4747;
+	border-left:1px solid #000000;
+}
+table.tabs td.singleTab .active {
+	padding-right:13px;
+}
+table.tabs td.singleTab:hover .tabBg {
+	color: #5c5e5d;
+	background-color:#EEEAEB;
+	background-image:url('img/tabs/unactive-gradient-hover.jpg');
+	background-repeat:repeat-x;
+	background-position:left top;
+}
+.tabs .singleTab:last-child .tabBg {
+	border-right:1px solid #867878;
+}
+.tabs .activeTab:first-child .tabBg {
+	border-left:1px solid #867878;
+}
+.tabs .singleTab:first-child .tabBg {
+	border-left:1px solid #867878;
+}
+.tabs div { cursor:pointer; }
+.tabContent {
+	border:1px solid #867878;
+	background-color:#f3f3f3;
+	min-width:400px;
+	min-height:100px;
+	height:auto;
+	float:left;
+	margin-top:-1px;
+}

@@ -1,0 +1,87 @@
+<div class="vm_list_box">
+
+<div class="label"><img src="img/minus_big.png" style="position:relative;padding-left:3px;padding-right:3px;top:-3px;cursor:pointer;" /> Virtual Machines List</div>
+
+<hr class="line">
+
+<div style="clear:both;">
+	<table class="pool_server" >
+		<tr id="server_1" class="pool_server_tr">
+		<td class="img" ><img src="img/server.png" /></td>
+		<td class="server_name">server_name</td>
+		<td class="server_description"> Some description for the server. </td>
+		<td class="memory_usage"><div class="memory_usage_text">Memory Usage : </div><div id="Bar"><div style="float: left; height: 10px; padding: 0; background-image: url(img/bar.png); width: 50px;" /></div></div><div class="memory_usage_text"> 5192M / 10280M</div></td>
+		<td class="cpu_usage"><div class="memory_usage_text">CPU Usage : </div><div id="Bar"><div style="float: left; height: 10px; padding: 0; background-image: url(img/bar.png); width: 30px;" /></div></div><div class="memory_usage_text"> 30%</div></td>
+		</tr>
+		<tr id="server_1_vms">
+			<td colspan="5">
+				<table width="100%">
+				<tr class="vm_row">
+				 <td class="vm_row_status" ><img src="img/running.png" style="position:relative;padding-left:3px;padding-right:3px;" /></td>
+				 <td class="vm_row_name" >xcpweb-server</td>
+				 <td class="vm_row_description" >DDK virtual machine</td>
+				 <td class="vm_row_memory" ><div class="memory_usage_text">Memory Usage : </div><div id="Bar"><div style="float: left; height: 10px; padding: 0; background-image: url(img/bar.png); width: 10px;" /></div></div><div class="memory_usage_text"> 512M / 10280M</div></td>
+				 <td class="vm_row_cpus cpus_count" >CPU Count: 1</td>
+				 <td class="vm_row_cpus cpus_weight" >Weight: 256</td>
+				 <td class="vm_row_cpus cpus_cap" >Cap: 95</td>
+				</tr>
+				<tr class="vm_row">
+				 <td class="vm_row_status" ><img src="img/stopped.png" style="position:relative;padding-left:3px;padding-right:3px;" /></td>
+				 <td class="vm_row_name" >testvm</td>
+				 <td class="vm_row_description" >Debian Lenny Server</td>
+				 <td class="vm_row_memory" ><div class="memory_usage_text">Memory Usage : </div><div id="Bar"><div style="float: left; height: 10px; padding: 0; background-image: url(img/bar.png); width: 10px;" /></div></div><div class="memory_usage_text"> 512M / 10280M</div></td>
+				 <td class="vm_row_cpus cpus_count" >CPU Count: 1</td>
+				 <td class="vm_row_cpus cpus_weight" >Weight: 256</td>
+				 <td class="vm_row_cpus cpus_cap" >Cap: 95</td>
+				</tr>
+				<tr class="vm_row">
+				 <td class="vm_row_status" ><img src="img/running.png" style="position:relative;padding-left:3px;padding-right:3px;" /></td>
+				 <td class="vm_row_name" >centos</td>
+				 <td class="vm_row_description" >CentOS 5.4 Virtual Machine</td>
+				 <td class="vm_row_memory" ><div class="memory_usage_text">Memory Usage : </div><div id="Bar"><div style="float: left; height: 10px; padding: 0; background-image: url(img/bar.png); width: 20px;" /></div></div><div class="memory_usage_text"> 1024M / 10280M</div></td>
+				 <td class="vm_row_cpus cpus_count" >CPU Count: 1</td>
+				 <td class="vm_row_cpus cpus_weight" >Weight: 256</td>
+				 <td class="vm_row_cpus cpus_cap" >Cap: 95</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		
+		<tr id="server_2" class="pool_server_tr">
+		<td class="img" ><img src="img/server.png" /></td>
+		<td class="server_name">other_server</td>
+		<td class="server_description"> Some description for the server. </td>
+		<td class="memory_usage"><div class="memory_usage_text">Memory Usage : </div><div id="Bar"><div style="float: left; height: 10px; padding: 0; background-image: url(img/bar.png); width: 80px;" /></div></div><div class="memory_usage_text"> 8192M / 10280M</div></td>
+		<td class="cpu_usage"><div class="memory_usage_text">CPU Usage : </div><div id="Bar"><div style="float: left; height: 10px; padding: 0; background-image: url(img/bar.png); width: 10px;" /></div></div><div class="memory_usage_text"> 10%</div></td>
+		</tr>
+		<tr id="server_2_vms">
+			<td colspan="5">
+				<table width="100%">
+				<tr class="vm_row" onClick="cp_submenus.vm('current_prv',event);">
+				 <td class="vm_row_status" ><img src="img/running.png" style="position:relative;padding-left:3px;padding-right:3px;" /></td>
+				 <td class="vm_row_name" >backup-server</td>
+				 <td class="vm_row_description" >DDK virtual machine</td>
+				 <td class="vm_row_memory" ><div class="memory_usage_text">Memory Usage : </div><div id="Bar"><div style="float: left; height: 10px; padding: 0; background-image: url(img/bar.png); width: 10px;" /></div></div><div class="memory_usage_text"> 512M / 10280M</div></td>
+				 <td class="vm_row_cpus cpus_count" >CPU Count: 1</td>
+				 <td class="vm_row_cpus cpus_weight" >Weight: 256</td>
+				 <td class="vm_row_cpus cpus_cap" >Cap: 95</td>
+				</tr>
+				<tr class="vm_row">
+				 <td class="vm_row_status" ><img src="img/stopped.png" style="position:relative;padding-left:3px;padding-right:3px;" /></td>
+				 <td class="vm_row_name" >testvm2</td>
+				 <td class="vm_row_description" >Debian Lenny Backup Server</td>
+				 <td class="vm_row_memory" ><div class="memory_usage_text">Memory Usage : </div><div id="Bar"><div style="float: left; height: 10px; padding: 0; background-image: url(img/bar.png); width: 10px;" /></div></div><div class="memory_usage_text"> 512M / 10280M</div></td>
+				 <td class="vm_row_cpus cpus_count" >CPU Count: 1</td>
+				 <td class="vm_row_cpus cpus_weight" >Weight: 256</td>
+				 <td class="vm_row_cpus cpus_cap" >Cap: 95</td>
+				</tr>
+				
+				</table>
+			</td>
+		</tr>
+		
+	</table>
+
+</div>
+
+</div>

@@ -1,0 +1,23 @@
+<html>
+<head>
+<script type="text/javascript" src="/interface/js/php.default.min.js"></script>
+<script type="text/javascript" src="/libxen/callbacks.js"></script>
+<script type="text/javascript" src="/libxen/db_callbacks.js"></script>
+<script type="text/javascript" src="/libxen/core.js"></script>
+<script type="text/javascript" src="/libxen/libxen.js"></script>
+<script type="text/javascript" >
+function callback_login()
+{
+alert(xen_db['session_id']);
+return;
+}
+</script>
+</head>
+<body>
+<script type="text/javascript">
+xen_init('root','xcpweb',callback_login);
+</script>
+just for test2
+</body>
+
+</html>

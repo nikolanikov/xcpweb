@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>XCP web interface submenu test</title>
+<link href="rightmenu.css" rel="stylesheet" type="text/css" />
+<script type="Text/JavaScript" Language="JavaScript" src="rightmenu.js"></script>
+<style media="all" type="text/css">
+.more-info {display:none}
+</style>
+<script type="text/javascript" language="javascript">
+var param;
+function createMenu(param,e) {
+	if (xcp_menu.getMenu(param)) { xcp_menu.dropMenu(param); }
+	var currentMenu = xcp_menu.createMenu(param);
+	if (typeof(currentMenu) == 'object') {
+		xcp_menu.appendInMenu(currentMenu,'item1','Item 1',"alert('Item 1')",'/interface/img/ico-arrow-right.png');
+		xcp_menu.appendInMenu(currentMenu,'item2','Item 2',"alert('Item 2');",'/interface/img/ico-arrow-right.png');
+		var subcurrent = xcp_menu.appendSubInMenu(currentMenu,'sub1','Sub1','/interface/img/ico-arrow-right.png');
+		if (typeof(subcurrent) == 'object') {
+			xcp_menu.appendInMenu(subcurrent,'submenu1','Sub Menu 1',"alert('Sub Menu 1')",'/interface/img/ico-arrow-right.png');
+		}
+		xcp_menu.appendInMenu(currentMenu,'item3','Item 3',"alert('item3');",'/interface/img/ico-arrow-right.png');
+		xcp_menu.appendInMenu(currentMenu,'item4','Item 4',"alert('item4')",'/interface/img/ico-arrow-right.png');
+		xcp_menu.openRightMenu('menu_'+param,e);
+	}
+}
+</script>
+</head>
+<body>
+<a href="#" onclick="createMenu('current_prv',event);">test menu</a>
+<div id="otherPages"></div>
+<div id="submenus"></div>
+</body>
+</html>

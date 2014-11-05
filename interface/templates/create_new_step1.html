@@ -1,0 +1,38 @@
+<div style="float:left;clear:none;">
+<table>
+<tr class="step1_tr"><td class="step1_td_label" width="124">Host Server :</td><td  align="left" width="200"><select class="step1_td_input" style="width: 100%;" id="host_servers"></select></td></tr>
+<tr class="step1_tr"><td class="step1_td_label" width="124">VM Name :</td><td><input type="text" class="step1_td_input" style="width:100%;" onChange="install_vm.options['name_label']=this.value;"/></td></tr>
+<tr class="step1_tr"><td class="step1_td_label" width="124">VM Description :</td><td><input type="text" class="step1_td_input"  style="width:100%;" id="description_input" onChange="install_vm.options['name_description']=this.value;"/></td></tr>
+<tr class="step1_tr">
+	<td colspan="2">
+	 <table width="100%" cellpadding="1" cellspacing="1">
+	  <tr>
+	  <td class="step1_td_label" width="124">Memory :</td>
+	  <td><input type="text" class="step1_td_input" style="width:50px;" onChange="install_vm.options['memory']=this.value;"/></td>
+	  <td class="step1_td_label" style="padding-left:0px;text-align:right;">vCPUs :</td>
+	  <td><select class="step1_td_input" style="width:100%;" id="host_vcpus" onChange="install_vm.options['vCPUs']=this.options[this.selectedIndex].value"></select></td>
+	  </tr>
+	 </table>
+	</td>
+</tr>
+
+</table>
+</div>
+
+<div class="host_status_box">
+	
+	<div class="title" id="host_box_title"></div>
+	<div class="description_row">vCPUs number: <span id="host_box_vcpus"></span></div>
+	<div class="description_row">Total memory: <span id="host_box_memory_total"></span>M</div>
+	<div class="description_row">Free memory: <span id="host_box_memory_free"></span>M</div>
+	<div class="description_row">Resident VMs: <span id="host_box_resident_vms"></span></div>
+</div>
+
+<div class="select_os_label">Select VM Template :</div>
+<div class="select_os">
+	<table style="width:100%;border-collapse:collapse;" id="dist_list">
+	</table>
+</div>
+
+<div class="next_step_button" onclick="document.getElementById('description_input').focus();templates.control_focus();install_vm.step_2();"></div>
+<!-- pri zarejdane 1. onload zarejda default host server 2. zarejda templates -->

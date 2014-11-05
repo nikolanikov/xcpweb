@@ -1,0 +1,620 @@
+<public:attach event="oncontentready" onevent="oncontentready('v08vnSVo78t4JfjH')" />
+<script type="text/javascript">
+/*--Do not remove this if you are using--
+Original Author: Remiz Rahnas
+Original Author URL: http://www.htmlremix.com
+Published date: 2008/09/24
+
+Changes by Nick Fetchak:
+- IE8 standards mode compatibility
+- VML elements now positioned behind original box rather than inside of it - should be less prone to breakage
+Published date : 2009/11/18
+*/
+
+// functions to take the width and height of hidden elements
+// taken from: http://blog.strictly-software.com/2009/10/correctly-measuring-element-dimensions.html
+    // Functions for converting properties from camelCase to CSS-Property format and vice versa
+    function toCamelCase(name){
+        var camelCase = name.replace(/\-(\w)/g, function(all, letter){
+            return letter.toUpperCase();
+        });
+        return camelCase
+    }
+    function toCSSProp(name){
+        return name.replace( /([A-Z])/g, "-$1" ).toLowerCase();
+    }
+
+    //returns the current style of an element with no conversions of units
+    function getStyle(el,style){
+        var ret = 0;
+        var	elem = (typeof(el)=="string")?G(el):el;
+        var val = "", doc = (elem.ownerDocument||elem.document||document);
+
+        // Make sure we have both formats for JS and CSS styles
+        var camelCase = toCamelCase(style); //convert to camelCase
+        var CSSProp = toCSSProp(style); //convert to css-property
+
+        // Try for computed style first as this will return the actual value converted to px
+        if (typeof doc.defaultView !== 'undefined' && typeof doc.defaultView.getComputedStyle !== 'undefined'){
+            // We only require the word float for computedStyle
+            if ( style.match( /float/i ) )
+                style = "float";
+
+            var computedStyle = doc.defaultView.getComputedStyle( elem, null );
+            //Standard Compliant function that will return the true computed size in px
+            if ( computedStyle ){
+                ret = computedStyle.getPropertyValue( CSSProp );
+            }
+        } else if ( elem.currentStyle ) {
+            //IE only
+            ret = elem.currentStyle[ camelCase ];
+        } else if(elem.style && elem.style[ camelCase ] ){
+            //Default to style if its been set by JS or inline styling
+            ret = elem.style[ camelCase ];
+        }
+
+        return ret
+    }
+
+    function G(i){ return document.getElementById(i) }
+
+    // returns an array of elements that need to be made visible to carry out a measurement of an element
+    function getVisibleObj(elem){
+        arrEls = []; // holds array of elements we need to make visible to measure X
+
+        while(elem && elem!==document){
+            var es = getStyle(elem,"display"); // method returns current/computed/style value
+
+            if(es == 'none'){
+                arrEls.push(elem);
+            }
+
+            elem = elem.parentNode;
+        }
+        return arrEls; //null;
+    }
+
+    // swap styles in and out for an accurate measurment. Taken from jQuery and tweaked by myself to
+    // handle multiple elements.
+    function Swap(elem, els, styles, callback){
+        var obj;
+
+        for(var x=0,l=els.length;x<l;x++){
+             // create hash on element to hold old styles so we can revert later
+             obj = els[x];
+             obj.old = {};
+
+             // Remember the old values, and insert the new ones
+             for ( var name in styles ) {
+                 obj.old[ name ] = obj.style[ name ];
+                 obj.style[ name ] = styles[ name ];
+             }
+        }
+
+        // call the function passing in any element that needs scope
+        callback.call( elem );
+
+        for(var x=0,l=els.length;x<l;x++){
+            obj = els[x];
+
+            // Revert the old values
+            for ( var name in styles ){
+                obj.style[ name ] = obj.old[ name ];
+            }
+            // delete the hash from the element
+            try{ delete obj.old; }catch(e){ obj.old=null}
+        }
+    }
+
+    // offsetWidth/Height is element.width/height +border+padding (standard box model)
+    // clientWidth/Height is element.width/height +padding (if overflow:scroll then -16px)
+    function getElementDimensions(el){
+        el = (typeof(el)=="string")?G(el):el; //return a reference to the element
+
+        var w=0,h=0,cw=0,ch=0,x=0,y=0;
+
+        // if element is currently hidden we won't be able to get measurements so we need to find out whether this or
+        // any other parent objects are hiding this element from the flow
+        var arrEls = getVisibleObj(el); //returns array of objects we need to show to meaure our element
+
+        // create function to do the measuring
+        function getElDim(){
+            // get style object
+            var els = el.style;
+
+            var pos = findPos(el);
+            // get dimensions
+            w = el.offsetWidth, h = el.offsetHeight, cw = el.clientWidth, ch = el.clientHeight,y = pos.y,x = pos.x;
+        }
+
+        // do we need to toggle other objects before getting our dimensions
+        if(arrEls && arrEls.length>0){
+            // call function to swap over properties so we can accuratley measure this element
+            var styles = {visibility: "hidden",display:"block"};
+            Swap(el, arrEls, styles, getElDim);
+        }else{
+            getElDim();
+        }
+
+        // create object
+        var ret = {
+            "width":w,  //total width (element+border+padding)
+            "height":h,
+            "clientWidth":cw, //element+padding
+            "clientHeight":ch,
+            "x":x,
+            "y":y
+        }
+
+        return ret;
+    }
+// end width/height functons
+
+// findPos() borrowed from http://www.quirksmode.org/js/findpos.html
+function findPos(obj) {
+    var curleft = curtop = 0;
+
+    if (obj.offsetParent) {
+        do {
+            curleft += obj.offsetLeft;
+            curtop += obj.offsetTop;
+        } while (obj = obj.offsetParent);
+    }
+
+    return({
+        'x': curleft,
+        'y': curtop
+    });
+}
+
+// get the four arc radiuses
+function getarcs(elem) {
+    var corners = {topRight: 0, bottomRight: 0, bottomLeft: 0, topLeft: 0}
+
+    var arcSize = parseInt(elem.currentStyle['-moz-border-radius'] ||
+                           elem.currentStyle['-webkit-border-radius'] ||
+                           elem.currentStyle['border-radius'] ||
+                           elem.currentStyle['-khtml-border-radius']);
+    if (!isNaN(arcSize)) {
+        corners = {topRight: arcSize, bottomRight: arcSize, bottomLeft: arcSize, topLeft: arcSize}
+    }
+
+    var topRightArc = parseInt(elem.currentStyle['-moz-border-radius-topright'] ||
+                               elem.currentStyle['-webkit-border-top-right-radius'] ||
+                               elem.currentStyle['border-top-right-radius'] ||
+                               elem.currentStyle['-khtml-border-top-right-radius']);
+
+    if (!isNaN(topRightArc)) {
+        corners.topRight = topRightArc;
+    }
+
+    var bottomRightArc = parseInt(elem.currentStyle['-moz-border-radius-bottomright'] ||
+                                  elem.currentStyle['-webkit-border-bottom-right-radius'] ||
+                                  elem.currentStyle['border-bottom-right-radius'] ||
+                                  elem.currentStyle['-khtml-border-bottom-right-radius']);
+
+    if (!isNaN(bottomRightArc)) {
+        corners.bottomRight = bottomRightArc;
+    }
+
+    var bottomLeftArc = parseInt(elem.currentStyle['-moz-border-radius-bottomleft'] ||
+                                 elem.currentStyle['-webkit-border-bottom-left-radius'] ||
+                                 elem.currentStyle['border-bottom-left-radius'] ||
+                                 elem.currentStyle['-khtml-border-bottom-left-radius']);
+
+    if (!isNaN(bottomLeftArc)) {
+        corners.bottomLeft = bottomLeftArc;
+    }
+
+    var topLeftArc = parseInt(elem.currentStyle['-moz-border-radius-topleft'] ||
+                              elem.currentStyle['-webkit-border-top-left-radius'] ||
+                              elem.currentStyle['border-top-left-radius'] ||
+                              elem.currentStyle['-khtml-border-top-left-radius']);
+
+    if (!isNaN(topLeftArc)) {
+        corners.topLeft = topLeftArc;
+    }
+
+    return corners;
+}
+
+// limiting corners depending on the size of the box
+function fixCorners(corners,rect_size) {
+    // left side
+    if (corners.topLeft + corners.bottomLeft >= rect_size.height) {
+        if (corners.topLeft <= rect_size.height/2) {
+            corners.bottomLeft = rect_size.height - corners.topLeft;
+        } else if (corners.bottomLeft <= rect_size.height/2) {
+            corners.topLeft = rect_size.height - corners.bottomLeft;
+        } else {
+            corners.bottomLeft = Math.floor(rect_size.height/2);
+            corners.topLeft = Math.floor(rect_size.height/2);
+        }
+    }
+    // alert(corners.bottomLeft);
+    // right side
+    if (corners.topRight + corners.bottomRight >= rect_size.height) {
+        if (corners.topRight <= rect_size.height/2) {
+            corners.bottomRight = rect_size.height - corners.topRight;
+        } else if (corners.bottomRight <= rect_size.height/2) {
+            corners.topRight = rect_size.height - corners.bottomRight;
+        } else {
+            corners.bottomRight = Math.floor(rect_size.height/2);
+            corners.topRight = Math.floor(rect_size.height/2);
+        }
+    }
+    // top side
+    if (corners.topRight + corners.topLeft >= rect_size.width) {
+        if (corners.topRight <= rect_size.width/2) {
+            corners.topLeft = rect_size.width - corners.topRight;
+        } else if (corners.topLeft <= rect_size.width/2) {
+            corners.topRight = rect_size.width - corners.topLeft;
+        } else {
+            corners.topLeft = Math.floor(rect_size.width/2);
+            corners.topRight = Math.floor(rect_size.width/2);
+        }
+    }
+    // bottom side
+    if (corners.bottomRight + corners.bottomLeft >= rect_size.width) {
+        if (corners.bottomRight <= rect_size.width/2) {
+            corners.bottomLeft = rect_size.width - corners.bottomRight;
+        } else if (corners.bottomLeft <= rect_size.width/2) {
+            corners.bottomRight = rect_size.width - corners.bottomLeft;
+        } else {
+            corners.bottomLeft = Math.floor(rect_size.width/2);
+            corners.bottomRight = Math.floor(rect_size.width/2);
+        }
+    }
+    return corners;
+}
+
+// check if VML shape and fill are already defined in CSS and do not define them again
+function addVMLCss() {
+    var hasVMLShape = false;
+    var hasVMLFill = false;
+    var sheets = window.document.styleSheets, l = sheets.length;
+    for(var i=0; i<l; i++) {
+        var rules = (sheets[i]).rules;
+        for(var j=0; j<l; j++) {
+            if (rules[j] != undefined && rules[j].selectorText != null
+                && (rules[j].selectorText == 'v:shape' || rules[j].selectorText == 'v\\:shape')
+                ) {
+                hasVMLShape = true;
+            }
+            if (rules[j] != undefined && rules[j].selectorText != null
+                && (rules[j].selectorText == 'v:fill' || rules[j].selectorText == 'v\\:fill')
+                ) {
+                hasVMLFill = true;
+            }
+        }
+    }
+    if (!hasVMLShape || !hasVMLFill) {
+        var css = window.document.createStyleSheet();
+    }
+    if (!hasVMLShape) {
+        css.addRule("v\\:shape", "behavior: url(#default#VML)");
+    }
+    if (!hasVMLFill) {
+        css.addRule("v\\:fill", "behavior: url(#default#VML)");
+    }
+}
+
+function makeShape(target,classID,colors) {
+    if (target.className.match(classID)) {
+        var tmpClassName = target.className;
+        target.className = tmpClassName.substring(0,tmpClassName.indexOf(classID))+tmpClassName.substring((tmpClassName.lastIndexOf(classID)+classID.length),tmpClassName.length)
+        // return(false);
+    }
+    target.className = target.className.concat(' ', classID);
+    var corners = getarcs(target);
+    if (colors == null) {
+        var fillColor = target.currentStyle.backgroundColor;
+        var fillSrc = target.currentStyle.backgroundImage.replace(/^url\("(.+)"\)$/, '$1');
+        var strokeColor = target.currentStyle.borderColor;
+    } else {
+        var fillColor = colors.backgroundColor;
+        var fillSrc = colors.backgroundImage;
+        var strokeColor = colors.borderColor;
+    }
+    var strokeWeight = parseInt(target.currentStyle.borderWidth);
+    var stroked = 'true';
+    if (isNaN(strokeWeight)) {
+        strokeWeight = 0;
+        strokeColor = fillColor;
+        stroked = 'false';
+    }
+    target.style.background = 'transparent';
+    target.style.borderColor = 'transparent';
+
+    // Find which element provides position:relative for the target element (default to BODY)
+    var el = target;
+    var limit = 100, i = 0;
+    // added absolute positioning also
+    while ((typeof(el) != 'unknown') && (el.currentStyle.position != 'relative') && (el.currentStyle.position != 'absolute') && (el.tagName != 'BODY')) {
+        el = el.parentElement;
+        i++;
+        if (i >= limit) { return(false); }
+    }
+    var el_zindex = parseInt(el.currentStyle.zIndex);
+    if (isNaN(el_zindex)) { el_zindex = 0; }
+    //alert('got tag '+ el.tagName +' with pos '+ el.currentStyle.position);
+
+    var rect_size = {
+        'width': target.offsetWidth - strokeWeight,
+        'height': target.offsetHeight - strokeWeight
+    };
+    // if sizes are <= 0 (when the element is hidden) use the function to get them
+    if (rect_size.width <= 0 && rect_size.height <= 0) {
+        var dimensions = getElementDimensions(target);
+        rect_size.width = dimensions.clientWidth;
+        rect_size.height = dimensions.clientHeight;
+    }
+
+    corners = fixCorners(corners,rect_size);
+
+    var el_pos = findPos(el);
+    var target_pos = findPos(target);
+
+    // if positions are <= 0 (when the element is hidden - happened on IE8 only) get the function to get them
+    if (el_pos.x <= 0 && el_pos.y <= 0) {
+        el_pos = getElementDimensions(el);
+    }
+    if (target_pos.x <= 0 && target_pos.y <= 0) {
+        target_pos = getElementDimensions(target);
+    }
+    target_pos.y = target_pos.y + (0.5 * strokeWeight) - el_pos.y;
+    target_pos.x = target_pos.x + (0.5 * strokeWeight) - el_pos.x;
+
+    var rect = document.createElement('v:shape');
+    rect.coordorigin="0 0";
+    rect.coordsize = rect_size.width+" "+rect_size.height;
+    var topRightPoint = (rect_size.width - corners.topRight);
+    if (topRightPoint < 0) {
+        topRightPoint = corners.topLeft;
+    }
+    topRightPoint += ',0';
+    var rightTopPoint = rect_size.width+','+corners.topRight;
+    var rightBottomPoint = (rect_size.height - corners.bottomRight);
+    if (rightBottomPoint < 0) {
+        rightBottomPoint = corners.topRight;
+    }
+    rightBottomPoint = rect_size.width+','+rightBottomPoint;
+    var bottomRightPoint = (rect_size.width - corners.bottomRight)+','+rect_size.height;
+    var bottomLeftPoint = corners.bottomLeft+','+rect_size.height;
+    var leftBottomPoint = '0,'+(rect_size.height - corners.bottomLeft);
+    var leftTopPoint = '0,'+corners.topLeft;
+    var topLeftPoint = corners.topLeft+',0';
+
+    var rightTopArc = '';
+    if (corners.topRight != 0) {
+        rightTopArc = 'c '+(rect_size.width-Math.ceil(corners.topRight/2))+',0 '+
+            rect_size.width+','+(Math.ceil(corners.topRight/2))+' '+
+            rightTopPoint+' ';
+    }
+    var rightBottomArc = '';
+    if (corners.bottomRight != 0) {
+        rightBottomArc = 'c '+(rect_size.width)+','+(rect_size.height - Math.ceil(corners.bottomRight/2))+' '+
+            (rect_size.width - Math.ceil(corners.bottomRight/2))+','+(rect_size.height)+' '+
+            bottomRightPoint+' ';
+    }
+    var leftBottomArc = '';
+    if (corners.bottomLeft != 0) {
+        leftBottomArc = 'c '+(Math.ceil(corners.bottomLeft/2))+','+rect_size.height+' '+
+            '0,'+(rect_size.height - Math.ceil(corners.bottomLeft/2))+' '+
+            leftBottomPoint+' ';
+    }
+    var topLeftArc = '';
+    if (corners.topLeft != 0) {
+        topLeftArc = 'c '+
+            '0,'+(Math.ceil(corners.topLeft/2))+' '+
+            (Math.ceil(corners.topLeft/2))+',0 '+
+            topLeftPoint+' ';
+    }
+
+    rect.path = 'm '+topLeftPoint+                          // start point
+        'l '+topRightPoint+' '+                             // top line
+        rightTopArc+                                        // top right arc
+        'l '+ rightBottomPoint+' '+                         // right line
+        rightBottomArc+                                     // bottom right arc
+        'l '+bottomLeftPoint+' '+                           // bottom line
+        leftBottomArc+                                      // bottom left arc
+        'l '+leftTopPoint+' '+                              // left line
+        topLeftArc+                                         // top left arc
+        ' x e';
+
+    rect.strokecolor = strokeColor;
+    rect.strokeWeight = strokeWeight +'px';
+    rect.stroked = stroked;
+    rect.style.display = 'block';
+    rect.style.position = 'absolute';
+    rect.style.top = target_pos.y +'px';
+    rect.style.left = target_pos.x +'px';
+    rect.style.width = rect_size.width +'px';
+    rect.style.height = rect_size.height +'px';
+    rect.style.antialias = true;
+    rect.style.zIndex = el_zindex - 1;
+    // debug(rect.style.zIndex);
+
+    var fill = document.createElement('v:fill');
+    fill.color = fillColor;
+    fill.src = fillSrc;
+    fill.type = 'tile';
+
+    rect.appendChild(fill);
+    el.appendChild(rect);
+
+    isIE6 = /msie|MSIE 6/.test(navigator.userAgent);
+    // IE6 doesn't support transparent borders, use padding to offset original element
+    if (isIE6 && (strokeWeight > 0)) {
+        target.style.borderStyle = 'none';
+        target.style.paddingTop = parseInt(target.currentStyle.paddingTop || 0) + strokeWeight;
+        target.style.paddingBottom = parseInt(target.currentStyle.paddingBottom || 0) + strokeWeight;
+    }
+    target.vml = rect;
+}
+
+
+function getRulesFor(target) {
+    var classes = target.className;
+    classes = classes.split(' ');
+    var classesTmp = new Array();
+    for (i = 0;i < classes.length;i++) {
+        if (classes[i] != '') {
+            classesTmp.push(classes[i]);
+        }
+    }
+    classes = classesTmp;
+
+    var sheets = window.document.styleSheets, l = sheets.length;
+    var rules = new Array();
+    for(var i=0; i<l; i++) {
+        rules = getRules(sheets[i],classes,rules);
+    }
+    return rules;
+}
+
+function getRules(sheet,classes,rulesExt) {
+    if(sheet.imports) {
+        try {
+            var imports = sheet.imports, l = imports.length;
+            for(var i=0; i<l; i++) getRules(sheet.imports[i],classes,rulesExt);
+        } catch(securityException){}
+    }
+
+    var rules = (currentSheet = sheet).rules, l = rules.length;
+    for(var j=0; j<l; j++) {
+        var rule = rules[j];
+        for (k = 0;k < classes.length;k++) {
+            if ('.'+classes[k] == rule.selectorText ||
+                '.'+classes[k]+':hover' == rule.selectorText
+                ) {
+                rulesExt.push(rule);
+            }
+        }
+    }
+    return rulesExt;
+}
+
+function hoverSupport(target,classID,unhoverBackgroundColor,unhoverBackgroundImage,unhoverBorderColor) {
+    // return false;
+    var hoverRule;
+    var hoverBackgroundColor;
+    var hoverBackgroundImage;
+    var hoverBorderColor;
+
+    function hover() {
+        var rules = getRulesFor(target);
+        for (i = 0;i < rules.length;i++) {
+            if (rules[i].selectorText.match(':hover')) {
+                hoverRule = rules[i];
+            }
+        }
+        if (hoverRule == undefined) {
+            return false;
+        }
+
+        // remove the whatever:hover class if it is there
+        isIE6 = /msie|MSIE 6/.test(navigator.userAgent);
+        if (isIE6) {
+            var removeClass = hoverRule.selectorText.substring(1,hoverRule.selectorText.indexOf(':hover'))+'onhover';
+            if (target.className.match(removeClass)) {
+                var tmpClassName = target.className;
+                target.className = tmpClassName.substring(0,tmpClassName.indexOf(removeClass))+tmpClassName.substring((tmpClassName.lastIndexOf(removeClass)+removeClass.length),tmpClassName.length)
+            }
+        }
+
+        hoverBackgroundColor = hoverRule.style.backgroundColor;
+        hoverBackgroundImage = hoverRule.style.backgroundImage;
+        hoverBorderColor = hoverRule.style.borderColor;
+        var colors = {'backgroundColor':hoverBackgroundColor,
+            'backgroundImage':hoverBackgroundImage,
+            'borderColor':hoverBorderColor};
+
+        var rect = target.vml;
+        var offsetParent = rect.offsetParent;
+        offsetParent.removeChild(rect);
+
+        makeShape(target,classID,colors);
+        hoverRule.style.backgroundColor = 'transparent';
+        hoverRule.style.backgroundImage = '';
+        hoverRule.style.borderColor = 'transparent';
+
+    }
+    function unHover() {
+        var rules = getRulesFor(target);
+        for (i = 0;i < rules.length;i++) {
+            if (rules[i].selectorText.match(':hover')) {
+                hoverRule = rules[i];
+            }
+        }
+
+        if (hoverRule == undefined) {
+            return false;
+        }
+
+        target.style.backgroundColor = unhoverBackgroundColor;
+        target.style.backgroundImage = unhoverBackgroundImage;
+        target.style.borderColor = unhoverBorderColor;
+
+        var rect = target.vml;
+        var offsetParent = rect.offsetParent;
+        offsetParent.removeChild(rect);
+        makeShape(target,classID);
+
+        hoverRule.style.backgroundColor = hoverBackgroundColor;
+        hoverRule.style.backgroundImage = hoverBackgroundImage;
+        hoverRule.style.borderColor = hoverBorderColor;
+    }
+    target.attachEvent('onmouseenter', function() {setTimeout(hover,0)});
+    target.attachEvent('onmouseleave', function() {setTimeout(unHover,0)});
+}
+
+function oncontentready(classID) {
+    if (!document.namespaces.v) { document.namespaces.add("v", "urn:schemas-microsoft-com:vml"); }
+    var target = this.element;
+
+    var unhoverBackgroundColor = target.currentStyle.backgroundColor;
+    var unhoverBackgroundImage = target.currentStyle.backgroundImage;
+    var unhoverBorderColor = target.currentStyle.borderColor;
+
+    makeShape(target,classID);
+
+    // :hover support
+    hoverSupport(target,classID,unhoverBackgroundColor,unhoverBackgroundImage,unhoverBorderColor);
+
+    addVMLCss()
+
+    if (typeof(window.rounded_elements) == 'undefined') {
+        window.rounded_elements = new Array();
+
+        if (typeof(window.onresize) == 'function') { window.previous_onresize = window.onresize; }
+        window.onresize = window_resize;
+    }
+    window.rounded_elements.push(target);
+}
+
+function window_resize() {
+    var classID = 'v08vnSVo78t4JfjH';
+    if (typeof(window.rounded_elements) == 'undefined') { return(false); }
+
+    for (var i in window.rounded_elements) {
+        var target = window.rounded_elements[i];
+        var rect = target.vml;
+
+        // since the target colors has been set to transparent, we need to supply the right colors. We can read then from the shape element and its fill element.
+        var fill = rect.childNodes[0];
+        var fillColor = new String(fill.color);
+        var fillSrc = new String(fill.src);
+        var borderColor = rect.strokeColor;
+        var colors = {'backgroundColor':fillColor,
+                      'backgroundImage':fillSrc,
+                      'borderColor':borderColor};
+
+        var offsetParent = rect.offsetParent;
+        offsetParent.removeChild(rect);
+
+        makeShape(target,classID,colors);
+    }
+    if (typeof(window.previous_onresize) == 'function') { window.previous_onresize(); }
+}
+</script>

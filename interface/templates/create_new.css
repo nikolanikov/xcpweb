@@ -1,0 +1,565 @@
+.install_vm_content
+{
+margin-left: 30px;
+clear:both;
+width: 940px;
+/*border: 1px solid #89b1c1;*/
+padding: 5px;
+/*
+behavior: url("/interface/border-radius.htc");
+-moz-border-radius: 4px;
+-webkit-border-radius: 4px;
+border-radius: 4px;
+*/
+}
+
+.install_vm_content .tr
+{
+min-height: 300px;
+vertical-align: top;
+}
+
+
+.install_vm_content .steps_td
+{
+width: 160px;
+border: 3px solid #bde0fc;
+background-color: #f8fcfd;
+-moz-border-radius: 4px;
+-webkit-border-radius: 4px;
+}
+
+.install_vm_content .content_td
+{
+width: 600px;
+border: 3px solid #bde0fc;
+background-color: #f8fcfd;
+-moz-border-radius: 4px;
+-webkit-border-radius: 4px;
+}
+
+.install_vm_content .menu_tr_selected
+{
+background-color: #a5e3fc;
+}
+
+.install_vm_content .menu_tr
+{
+	cursor:pointer;
+}
+
+.install_vm_content .menu_tr:hover
+{
+background-color: #f0fbfe;
+}
+
+.install_vm_content .step_inst_steps
+{
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 13pt;
+	font-weight: bold;
+	color: #384764;
+	padding-top: 8px;
+	padding-bottom: 20px;
+	text-shadow: 0 1px 2px #d1cafa;
+}
+
+.install_vm_content .step_name
+{
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 13pt;
+	font-weight: bold;
+	color: #384764;
+	height: 40px;
+}
+
+.install_vm_content .step1_tr
+{
+	height: 30px;
+}
+
+.install_vm_content .step1_td_label
+{
+	text-align: left;
+	padding-left: 10px;
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 10pt;
+	font-weight: bold;
+}
+
+.install_vm_content .step1_td_input
+{
+	border: 1px solid #bde0fc;
+}
+
+.install_vm_content .step1_td_input:focus
+{
+	border: 2px solid #bde0fc;
+}
+
+.install_vm_content .host_status_box
+{
+	float:left;
+	clear:none;
+	width:180px;
+	height:110px;
+	margin: 9px 0px 0px 40px;
+	background-color: #f0fbfe;
+	border: 1px solid #a5e3fc;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+
+.install_vm_content .host_status_box .title
+{
+	color: #384764;
+	size:10pt;
+	font-weight:bold;
+	padding:4px;
+	clear:both;
+	width:100%;
+	text-align:center;
+}
+
+.install_vm_content .host_status_box .description_row
+{
+	color: #384764;
+	size:10pt;
+	padding-left:20px;
+	padding-top:5px;
+	clear:both;
+	width:100%;
+	text-align:left;
+}
+
+.install_vm_content .host_status_box .description_row span
+{
+	color: #384764;
+	size:10pt;	
+}
+
+.install_vm_content .select_os_label
+{
+	text-align: left;
+	padding-left: 10px;
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 10pt;
+	font-weight: bold;
+	float:left;
+	clear:both;
+	width:100%;
+	padding-top:10px;
+}
+
+.install_vm_content .select_os
+{
+	overflow: auto;
+	width: 580px;
+	margin-left: 10px;
+	float:left;
+	clear:both;
+	margin-top:10px;
+	border: 1px solid #bde0fc;
+	background-color: #ffffff;
+	height: 100px;
+}
+
+.install_vm_content .select_os tr
+{
+	height:20px;
+	cursor:pointer;
+	background-color: #ffffff;
+}
+
+.install_vm_content .select_os tr:hover
+{
+	height:20px;
+	cursor:pointer;
+	background-color: #f0fbfe;
+}
+
+.install_vm_content .select_os .icon
+{
+	width:24px;
+	text-align:left;
+	padding-left: 4px;	
+}
+
+.install_vm_content .select_os .title
+{
+	text-align:left;
+	padding-left: 2px;
+	color: #384764;
+	size:10pt;
+	font-weight:bold;	
+}
+
+.install_vm_content .select_os .type
+{
+	width:90px;
+	text-align:center;	
+	color: #384764;
+	size:10pt;
+	font-weight:bold;
+}
+
+.install_vm_content .next_step_button
+{
+float:right;
+clear:both;
+width: 210px;
+height: 50px;
+background-image: url(/interface/img/next_step_button.png);
+display: block;
+cursor: pointer;
+margin: 10px;
+}
+
+
+.install_vm_content .next_step_button:hover
+{
+background-image: url(/interface/img/next_step_button_active.png) !important;
+}
+
+/* step 2 */
+
+.install_vm_content .step2_vm_label
+{
+	text-align: left;
+	padding-top: 10px;
+	padding-left: 10px;
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 10pt;
+	font-weight: bold;
+}
+
+.install_vm_content .step2_vm_label .icon
+{
+	padding-left:4px;
+	padding-right:4px;
+	position:relative;
+	top:3px;
+}
+
+.install_vm_content .step2_vm_label .title
+{
+	color: #384764;
+}
+
+.install_vm_content .step2_vm_description
+{
+float:left;
+clear:none;
+width:570px;
+margin-left: 10px;
+margin-top: 10px;
+background-color: #f0fbfe;
+border: 1px solid #a5e3fc;
+padding: 4px;
+font-family: Arial,Helvetica,sans-serif;
+font-size: 10pt;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+}
+
+.install_vm_content .step2_location_title
+{
+float:left;
+clear:none;
+width:100%;
+font-family: Arial,Helvetica,sans-serif;
+font-size: 10pt;
+font-weight: bold;
+padding-top: 20px;
+padding-left: 10px;
+}
+
+.install_vm_content .step2_location
+{
+float:left;
+clear:none;
+width:100%;
+
+padding-top: 14px;
+padding-left: 10px;
+}
+
+.install_vm_content .step2_location .tr
+{
+	height:30px;
+}
+
+.install_vm_content .step2_location .td_radio
+{
+	vertical-align: middle;
+	padding-right: 10px;
+}
+
+.install_vm_content .step2_location .td_title
+{
+	font-family: Arial,Helvetica,sans-serif;
+	vertical-align: middle;
+	font-size: 10pt;
+	font-weight: bold;
+	width:120px;
+	text-align: left;
+}
+
+.install_vm_content .step2_location .td_input
+{
+	vertical-align: middle;
+}
+
+.install_vm_content .step2_location .input
+{
+	width: 250px;
+	vertical-align: middle;
+	border: 1px solid #bde0fc;
+	height: 20px;
+}
+
+.install_vm_content .step2_location .input:focus
+{
+	border: 2px solid #bde0fc;
+}
+
+/* step 3 and 4*/
+
+.install_vm_content button {
+	background-image: url(/interface/img/button_bg.png);
+	background-repeat: repeat-x;
+	background-position: left top;
+	border: 1px solid #89bbd2;
+	color: #333333;
+	font-family: Arial, Helvetica, sans-serif;
+	cursor: pointer;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	font-weight: bold;
+	padding-right: 8px;
+	padding-left: 8px;
+	*padding:0!important;
+	background-color: #dddddd;
+	font-size: 12px;
+	margin-right:4px;
+}
+.install_vm_content button:hover {
+	background-image: url(/interface/img/button_hover.png);
+	background-repeat: repeat-x;
+	background-position: left top;
+	color:#000000;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	font-weight: bold;
+	padding-right: 8px;
+	padding-left: 8px;
+	background-color: #f0efef;
+	font-size: 12px;
+	border:1px solid #abacac;
+}
+
+.install_vm_content .step3_description
+{
+float:left;
+clear:none;
+width:566px;
+margin-left: 10px;
+margin-top: 10px;
+background-color: #f0fbfe;
+border: 1px solid #a5e3fc;
+padding: 4px;
+font-family: Arial,Helvetica,sans-serif;
+font-size: 10pt;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+}
+
+.install_vm_content .disks_settings
+{
+	overflow: auto;
+	width: 576px;
+	margin-left: 10px;
+	float:left;
+	clear:both;
+	margin-top:10px;
+	border: 1px solid #bde0fc;
+	background-color: #ffffff;
+	height: 100px;
+}
+
+.install_vm_content .disks_settings tr
+{
+	height:20px;
+	cursor:pointer;
+	background-color: #ffffff;
+}
+
+.install_vm_content .disks_settings tr:hover
+{
+	height:20px;
+	cursor:pointer;
+	background-color: #f0fbfe;
+}
+
+.install_vm_content .disks_settings th
+{
+	text-align:left;
+	size:10pt;
+	font-weight:bold;
+	background-color: #dfdddb;
+	padding-left: 3px;
+}
+
+.install_vm_content .disks_settings th:hover
+{
+	background-color: #bfbbbb;
+}
+
+.install_vm_content .disks_settings td
+{
+	text-align:left;
+	color: #384764;
+	size:10pt;
+	font-weight:bold;
+	padding-left: 3px;
+}
+
+.install_vm_content .disks_settings .size
+{
+	width: 60px;
+}
+
+.install_vm_content .disks_settings .shared
+{
+	width: 100px;
+}
+
+.install_vm_content .network_settings
+{
+	overflow: auto;
+	width: 576px;
+	margin-left: 10px;
+	float:left;
+	clear:both;
+	margin-top:10px;
+	border: 1px solid #bde0fc;
+	background-color: #ffffff;
+	height: 60px;
+}
+
+.install_vm_content .network_settings tr
+{
+	height:20px;
+	cursor:pointer;
+	background-color: #ffffff;
+}
+
+.install_vm_content .network_settings tr:hover
+{
+	height:20px;
+	cursor:pointer;
+	background-color: #f0fbfe;
+}
+
+.install_vm_content .network_settings th
+{
+	text-align:left;
+	size:10pt;
+	font-weight:bold;
+	background-color: #dfdddb;
+	padding-left: 3px;
+}
+
+.install_vm_content .network_settings th:hover
+{
+	background-color: #bfbbbb;
+}
+
+.install_vm_content .network_settings td
+{
+	text-align:left;
+	color: #384764;
+	size:10pt;
+	font-weight:bold;
+	padding-left: 3px;
+}
+
+.install_vm_content .disks_settings .size
+{
+	width: 120px;
+}
+
+
+.install_vm_content .buttons
+{
+	margin-top: 5px;
+	margin-right: 8px;
+	margin-bottom: 10px;
+	float:right;
+	clear:both;
+}
+
+/* step 5 */
+
+.install_vm_content .configuration_done
+{
+float:left;
+clear:none;
+width:100%;
+font-family: Arial,Helvetica,sans-serif;
+font-size: 20pt;
+font-weight: bold;
+padding-left: 10px;
+padding-top: 10px;
+color: #384764;
+}
+
+.install_vm_content .configuration_description
+{
+float:left;
+clear:none;
+width:566px;
+margin-left: 10px;
+margin-top: 10px;
+background-color: #f0fbfe;
+border: 1px solid #a5e3fc;
+padding: 4px;
+font-family: Arial,Helvetica,sans-serif;
+font-size: 10pt;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+}
+
+.install_vm_content .configuration_option
+{
+	text-align: left;
+	padding-top: 10px;
+	padding-left: 10px;
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 10pt;
+	font-weight: bold;
+}
+
+.install_vm_content .passed_steps
+{
+	padding: 10px;
+	
+}
+
+.install_vm_content .passed_steps tr
+{
+	height: 20px;
+	
+}
+
+.install_vm_content .passed_steps .status
+{
+	padding-right: 5px;
+}
+
+.install_vm_content .passed_steps .title
+{
+	font-size: 11pt;
+	font-weight: bold;
+}
+

@@ -1,0 +1,23 @@
+
+<div class="login_box">
+
+<div class="label">Login Information</div>
+<div style="clear:both;">
+<form name="login_form" onSubmit="alert('a');">
+<table width="100%">
+<tr height="44"><td align="right" class="small_label">Username :</td><td align="center"><input type="text" class="textfield" id="login_username" onKeyDown="if(event.keyCode==13)login.try_login();" /></td></tr>
+<tr height="44"><td align="right" class="small_label">Password :</td><td align="center"><input type="password" class="textfield" id="login_password" onKeyDown="if(event.keyCode==13)login.try_login();" /></td></tr>
+<tr height="54"><td>&nbsp;</td><td align="center"><div class="login_button" onClick="login.try_login();"></div></td></tr>
+</table>
+</form>
+</div>
+
+</div>
+
+<div class="login_box_loading" id="loading_box" style="display:none;">
+<img src="/interface/img/loading.gif" style="position:relative;top:3px;"> Loading... Please wait.
+</div>
+
+<div class="login_box_error" id="error_box" style="display:none;">
+Wrong username or password.
+</div>

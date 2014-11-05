@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>XCP web interface tabs test</title>
+<link href="tabs.css" rel="stylesheet" type="text/css" />
+<script type="Text/JavaScript" Language="JavaScript" src="tabs.js"></script>
+<script type="text/javascript" language="javascript">
+function testTabs() {
+	tabs.construct('testtab');
+	tabs.append('name','name of the tab',function() { myFunc(1); });
+	tabs.append('name2','name2 of the tab',function() { myFunc(2); });
+	tabs.activateByAlias('name',tabs.getDom());
+	document.getElementById('tabDiv').appendChild(tabs.getDom());
+	var cnt = document.createElement('DIV');
+	cnt.setAttribute('id','tabContent');
+	cnt.className = 'tabContent';
+	document.getElementById('tabDiv').appendChild(cnt);
+	tabs.clear();
+}
+function myFunc(param) {
+	document.getElementById('tabContent').innerHTML = param;
+}
+</script>
+<style>
+#tabDiv {
+	width:auto;
+	text-align:left;
+}
+</style>
+</head>
+<body onload="testTabs();">
+<div id="tabDiv"></div>
+</body>
+</html>
